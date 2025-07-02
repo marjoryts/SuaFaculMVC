@@ -1,10 +1,6 @@
 <?php
 require_once __DIR__ . '/../models/Vestibular.php';
 
-/**
- * Controlador de Vestibulares
- * Responsável por gerenciar todas as operações relacionadas aos vestibulares
- */
 class VestibularController {
     private $vestibular;
 
@@ -12,53 +8,31 @@ class VestibularController {
         $this->vestibular = new Vestibular();
     }
 
-    /**
-     * Lista todos os vestibulares
-     * @return array Retorna resposta JSON com lista de vestibulares
-     */
+
     public function listarTodos() {
         header('Content-Type: application/json');
         $vestibulares = $this->vestibular->listarTodos();
         echo json_encode(['success' => true, 'data' => $vestibulares]);
     }
 
-    /**
-     * Lista vestibulares próximos
-     * @return array Retorna resposta JSON com vestibulares próximos
-     */
     public function listarProximos() {
         header('Content-Type: application/json');
         $vestibulares = $this->vestibular->listarProximos();
         echo json_encode(['success' => true, 'data' => $vestibulares]);
     }
 
-    /**
-     * Lista vestibulares por status
-     * @param string $status Status do vestibular
-     * @return array Retorna resposta JSON com vestibulares do status
-     */
     public function listarPorStatus($status) {
         header('Content-Type: application/json');
         $vestibulares = $this->vestibular->listarPorStatus($status);
         echo json_encode(['success' => true, 'data' => $vestibulares]);
     }
 
-    /**
-     * Busca vestibulares por instituição
-     * @param string $instituicao Nome da instituição
-     * @return array Retorna resposta JSON com vestibulares da instituição
-     */
     public function buscarPorInstituicao($instituicao) {
         header('Content-Type: application/json');
         $vestibulares = $this->vestibular->buscarPorInstituicao($instituicao);
         echo json_encode(['success' => true, 'data' => $vestibulares]);
     }
 
-    /**
-     * Busca um vestibular por ID
-     * @param int $id ID do vestibular
-     * @return array Retorna resposta JSON com dados do vestibular
-     */
     public function buscarPorId($id) {
         header('Content-Type: application/json');
         $vestibular = $this->vestibular->buscarPorId($id);
@@ -69,20 +43,12 @@ class VestibularController {
         }
     }
 
-    /**
-     * Lista todas as instituições disponíveis
-     * @return array Retorna resposta JSON com lista de instituições
-     */
     public function listarInstituicoes() {
         header('Content-Type: application/json');
         $instituicoes = $this->vestibular->listarInstituicoes();
         echo json_encode(['success' => true, 'data' => $instituicoes]);
     }
 
-    /**
-     * Cria um novo vestibular
-     * @return array Retorna resposta JSON com status da criação
-     */
     public function criar() {
         header('Content-Type: application/json');
         $response = ['success' => false, 'message' => ''];
@@ -126,10 +92,6 @@ class VestibularController {
         echo json_encode($response);
     }
 
-    /**
-     * Atualiza os dados de um vestibular
-     * @return array Retorna resposta JSON com status da atualização
-     */
     public function atualizar() {
         header('Content-Type: application/json');
         $response = ['success' => false, 'message' => ''];
@@ -175,11 +137,6 @@ class VestibularController {
         echo json_encode($response);
     }
 
-    /**
-     * Deleta um vestibular
-     * @param int $id ID do vestibular a ser deletado
-     * @return array Retorna resposta JSON com status da exclusão
-     */
     public function deletar($id) {
         header('Content-Type: application/json');
         $response = ['success' => false, 'message' => ''];
@@ -194,10 +151,6 @@ class VestibularController {
         echo json_encode($response);
     }
 
-    /**
-     * Atualiza o status dos vestibulares automaticamente
-     * @return array Retorna resposta JSON com status da atualização
-     */
     public function atualizarStatusAutomatico() {
         header('Content-Type: application/json');
         $response = ['success' => false, 'message' => ''];
@@ -212,9 +165,6 @@ class VestibularController {
         echo json_encode($response);
     }
 
-    /**
-     * Exibe a página de listagem de vestibulares
-     */
     public function index() {
         $vestibulares = $this->vestibular->listarTodos();
         $instituicoes = $this->vestibular->listarInstituicoes();
@@ -225,10 +175,7 @@ class VestibularController {
         include __DIR__ . '/../views/vestibulares/index.php';
     }
 
-    /**
-     * Exibe a página de detalhes de um vestibular
-     * @param int $id ID do vestibular
-     */
+
     public function detalhes($id) {
         $vestibular = $this->vestibular->buscarPorId($id);
         
@@ -244,9 +191,6 @@ class VestibularController {
         }
     }
 
-    /**
-     * Exibe a página de calendário de vestibulares
-     */
     public function calendario() {
         $vestibulares = $this->vestibular->listarTodos();
         

@@ -1,10 +1,6 @@
 <?php
 require_once __DIR__ . '/../models/Faculdade.php';
 
-/**
- * Controlador de Faculdades
- * Responsável por gerenciar todas as operações relacionadas às faculdades
- */
 class FaculdadeController {
     private $faculdade;
 
@@ -12,53 +8,30 @@ class FaculdadeController {
         $this->faculdade = new Faculdade();
     }
 
-    /**
-     * Lista todas as faculdades
-     * @return array Retorna resposta JSON com lista de faculdades
-     */
     public function listarTodas() {
         header('Content-Type: application/json');
         $faculdades = $this->faculdade->listarTodas();
         echo json_encode(['success' => true, 'data' => $faculdades]);
     }
 
-    /**
-     * Lista faculdades em destaque
-     * @return array Retorna resposta JSON com faculdades em destaque
-     */
     public function listarDestaque() {
         header('Content-Type: application/json');
         $faculdades = $this->faculdade->listarDestaque();
         echo json_encode(['success' => true, 'data' => $faculdades]);
     }
 
-    /**
-     * Busca faculdades por cidade
-     * @param string $cidade Nome da cidade
-     * @return array Retorna resposta JSON com faculdades da cidade
-     */
     public function buscarPorCidade($cidade) {
         header('Content-Type: application/json');
         $faculdades = $this->faculdade->buscarPorCidade($cidade);
         echo json_encode(['success' => true, 'data' => $faculdades]);
     }
 
-    /**
-     * Busca faculdades por tipo
-     * @param string $tipo Tipo da faculdade (pública/particular)
-     * @return array Retorna resposta JSON com faculdades do tipo
-     */
     public function buscarPorTipo($tipo) {
         header('Content-Type: application/json');
         $faculdades = $this->faculdade->buscarPorTipo($tipo);
         echo json_encode(['success' => true, 'data' => $faculdades]);
     }
 
-    /**
-     * Busca uma faculdade por ID
-     * @param int $id ID da faculdade
-     * @return array Retorna resposta JSON com dados da faculdade
-     */
     public function buscarPorId($id) {
         header('Content-Type: application/json');
         $faculdade = $this->faculdade->buscarPorId($id);
@@ -68,11 +41,6 @@ class FaculdadeController {
             echo json_encode(['success' => false, 'message' => 'Faculdade não encontrada.']);
         }
     }
-
-    /**
-     * Cria uma nova faculdade
-     * @return array Retorna resposta JSON com status da criação
-     */
     public function criar() {
         header('Content-Type: application/json');
         $response = ['success' => false, 'message' => ''];
@@ -88,7 +56,6 @@ class FaculdadeController {
             $telefone = trim($_POST['telefone'] ?? '');
             $website = trim($_POST['website'] ?? '');
 
-            // Validações
             if (empty($nome) || empty($cidade) || empty($estado) || empty($tipo)) {
                 $response['message'] = "Por favor, preencha todos os campos obrigatórios.";
             } elseif (!in_array($tipo, ['pública', 'particular'])) {
@@ -118,10 +85,6 @@ class FaculdadeController {
         echo json_encode($response);
     }
 
-    /**
-     * Atualiza os dados de uma faculdade
-     * @return array Retorna resposta JSON com status da atualização
-     */
     public function atualizar() {
         header('Content-Type: application/json');
         $response = ['success' => false, 'message' => ''];
@@ -138,7 +101,7 @@ class FaculdadeController {
             $telefone = trim($_POST['telefone'] ?? '');
             $website = trim($_POST['website'] ?? '');
 
-            // Validações
+            
             if (empty($id) || empty($nome) || empty($cidade) || empty($estado) || empty($tipo)) {
                 $response['message'] = "Por favor, preencha todos os campos obrigatórios.";
             } elseif (!in_array($tipo, ['pública', 'particular'])) {
@@ -169,11 +132,6 @@ class FaculdadeController {
         echo json_encode($response);
     }
 
-    /**
-     * Deleta uma faculdade
-     * @param int $id ID da faculdade a ser deletada
-     * @return array Retorna resposta JSON com status da exclusão
-     */
     public function deletar($id) {
         header('Content-Type: application/json');
         $response = ['success' => false, 'message' => ''];
@@ -188,10 +146,6 @@ class FaculdadeController {
         echo json_encode($response);
     }
 
-    /**
-     * Busca faculdades com filtros
-     * @return array Retorna resposta JSON com faculdades filtradas
-     */
     public function buscarComFiltros() {
         header('Content-Type: application/json');
         
@@ -201,7 +155,6 @@ class FaculdadeController {
 
         $faculdades = $this->faculdade->listarTodas();
 
-        // Aplica filtros
         if (!empty($cidade)) {
             $faculdades = array_filter($faculdades, function($faculdade) use ($cidade) {
                 return stripos($faculdade['cidade'], $cidade) !== false;

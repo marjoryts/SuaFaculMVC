@@ -1,6 +1,5 @@
 <?php
 
-// Configurações
 $config = [
     'new_db' => [
         'host' => 'localhost',
@@ -12,7 +11,6 @@ $config = [
 
 echo "=== Script de Migração SuaFacul MVC ===\n\n";
 
-// Verifica se as tabelas existem
 function verificarTabelas($pdo) {
     $tabelas_necessarias = [
         'usuarios',
@@ -38,7 +36,6 @@ function verificarTabelas($pdo) {
     return true;
 }
 
-// Cria as tabelas se não existirem
 function criarTabelas($pdo) {
     echo "Criando tabelas...\n";
     
@@ -205,6 +202,5 @@ function main() {
     }
 }
 
-// Executa a migração
 main();
 ?> 

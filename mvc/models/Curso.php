@@ -19,10 +19,6 @@ class Curso {
         $this->conn = $database->getConnection();
     }
 
-    /**
-     * Lista todos os cursos
-     * @return array Retorna array com todos os cursos
-     */
     public function listarTodos() {
         $query = "SELECT * FROM " . $this->table_name . " ORDER BY nome ASC";
         $stmt = $this->conn->prepare($query);
@@ -30,11 +26,6 @@ class Curso {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Busca cursos por nome
-     * @param string $nome Nome do curso
-     * @return array Retorna array com cursos que contêm o nome
-     */
     public function buscarPorNome($nome) {
         $query = "SELECT * FROM " . $this->table_name . " WHERE nome LIKE :nome ORDER BY nome ASC";
         $stmt = $this->conn->prepare($query);
@@ -44,11 +35,6 @@ class Curso {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Busca cursos por área
-     * @param string $area Área do curso
-     * @return array Retorna array com cursos da área especificada
-     */
     public function buscarPorArea($area) {
         $query = "SELECT * FROM " . $this->table_name . " WHERE area = :area ORDER BY nome ASC";
         $stmt = $this->conn->prepare($query);
@@ -57,11 +43,6 @@ class Curso {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Busca cursos por tipo (presencial, híbrido, EaD)
-     * @param string $tipo Tipo do curso
-     * @return array Retorna array com cursos do tipo especificado
-     */
     public function buscarPorTipo($tipo) {
         $query = "SELECT * FROM " . $this->table_name . " WHERE tipo = :tipo ORDER BY nome ASC";
         $stmt = $this->conn->prepare($query);
@@ -70,11 +51,6 @@ class Curso {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Busca um curso por ID
-     * @param int $id ID do curso
-     * @return array|null Retorna os dados do curso ou null se não encontrado
-     */
     public function buscarPorId($id) {
         $query = "SELECT * FROM " . $this->table_name . " WHERE id = :id";
         $stmt = $this->conn->prepare($query);
@@ -83,10 +59,6 @@ class Curso {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Lista todas as áreas disponíveis
-     * @return array Retorna array com todas as áreas
-     */
     public function listarAreas() {
         $query = "SELECT DISTINCT area FROM " . $this->table_name . " ORDER BY area ASC";
         $stmt = $this->conn->prepare($query);
@@ -94,10 +66,6 @@ class Curso {
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
-    /**
-     * Cria um novo curso
-     * @return bool Retorna true se o curso foi criado com sucesso
-     */
     public function criar() {
         $query = "INSERT INTO " . $this->table_name . " 
                   (nome, area, duracao, tipo, descricao, grade_curricular, mercado_trabalho) 
@@ -114,7 +82,7 @@ class Curso {
         $this->grade_curricular = htmlspecialchars(strip_tags($this->grade_curricular));
         $this->mercado_trabalho = htmlspecialchars(strip_tags($this->mercado_trabalho));
 
-        // Vincula os parâmetros
+        
         $stmt->bindParam(":nome", $this->nome);
         $stmt->bindParam(":area", $this->area);
         $stmt->bindParam(":duracao", $this->duracao);
@@ -126,10 +94,6 @@ class Curso {
         return $stmt->execute();
     }
 
-    /**
-     * Atualiza os dados de um curso
-     * @return bool Retorna true se a atualização foi bem-sucedida
-     */
     public function atualizar() {
         $query = "UPDATE " . $this->table_name . " 
                   SET nome = :nome, area = :area, duracao = :duracao, tipo = :tipo, 
@@ -139,7 +103,6 @@ class Curso {
 
         $stmt = $this->conn->prepare($query);
 
-        // Limpa e valida os dados
         $this->nome = htmlspecialchars(strip_tags($this->nome));
         $this->area = htmlspecialchars(strip_tags($this->area));
         $this->duracao = htmlspecialchars(strip_tags($this->duracao));
@@ -149,7 +112,6 @@ class Curso {
         $this->mercado_trabalho = htmlspecialchars(strip_tags($this->mercado_trabalho));
         $this->id = htmlspecialchars(strip_tags($this->id));
 
-        // Vincula os parâmetros
         $stmt->bindParam(":nome", $this->nome);
         $stmt->bindParam(":area", $this->area);
         $stmt->bindParam(":duracao", $this->duracao);
@@ -161,12 +123,7 @@ class Curso {
 
         return $stmt->execute();
     }
-
-    /**
-     * Deleta um curso
-     * @param int $id ID do curso a ser deletado
-     * @return bool Retorna true se a exclusão foi bem-sucedida
-     */
+    
     public function deletar($id) {
         $query = "DELETE FROM " . $this->table_name . " WHERE id = :id";
         $stmt = $this->conn->prepare($query);

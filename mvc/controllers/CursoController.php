@@ -1,10 +1,6 @@
 <?php
 require_once __DIR__ . '/../models/Curso.php';
 
-/**
- * Controlador de Cursos
- * Responsável por gerenciar todas as operações relacionadas aos cursos
- */
 class CursoController {
     private $curso;
 
@@ -12,54 +8,30 @@ class CursoController {
         $this->curso = new Curso();
     }
 
-    /**
-     * Lista todos os cursos
-     * @return array Retorna resposta JSON com lista de cursos
-     */
     public function listarTodos() {
         header('Content-Type: application/json');
         $cursos = $this->curso->listarTodos();
         echo json_encode(['success' => true, 'data' => $cursos]);
     }
 
-    /**
-     * Busca cursos por nome
-     * @param string $nome Nome do curso
-     * @return array Retorna resposta JSON com cursos encontrados
-     */
     public function buscarPorNome($nome) {
         header('Content-Type: application/json');
         $cursos = $this->curso->buscarPorNome($nome);
         echo json_encode(['success' => true, 'data' => $cursos]);
     }
 
-    /**
-     * Busca cursos por área
-     * @param string $area Área do curso
-     * @return array Retorna resposta JSON com cursos da área
-     */
     public function buscarPorArea($area) {
         header('Content-Type: application/json');
         $cursos = $this->curso->buscarPorArea($area);
         echo json_encode(['success' => true, 'data' => $cursos]);
     }
 
-    /**
-     * Busca cursos por tipo
-     * @param string $tipo Tipo do curso (presencial, híbrido, EaD)
-     * @return array Retorna resposta JSON com cursos do tipo
-     */
     public function buscarPorTipo($tipo) {
         header('Content-Type: application/json');
         $cursos = $this->curso->buscarPorTipo($tipo);
         echo json_encode(['success' => true, 'data' => $cursos]);
     }
 
-    /**
-     * Busca um curso por ID
-     * @param int $id ID do curso
-     * @return array Retorna resposta JSON com dados do curso
-     */
     public function buscarPorId($id) {
         header('Content-Type: application/json');
         $curso = $this->curso->buscarPorId($id);
@@ -70,20 +42,12 @@ class CursoController {
         }
     }
 
-    /**
-     * Lista todas as áreas disponíveis
-     * @return array Retorna resposta JSON com lista de áreas
-     */
     public function listarAreas() {
         header('Content-Type: application/json');
         $areas = $this->curso->listarAreas();
         echo json_encode(['success' => true, 'data' => $areas]);
     }
 
-    /**
-     * Cria um novo curso
-     * @return array Retorna resposta JSON com status da criação
-     */
     public function criar() {
         header('Content-Type: application/json');
         $response = ['success' => false, 'message' => ''];
@@ -125,10 +89,6 @@ class CursoController {
         echo json_encode($response);
     }
 
-    /**
-     * Atualiza os dados de um curso
-     * @return array Retorna resposta JSON com status da atualização
-     */
     public function atualizar() {
         header('Content-Type: application/json');
         $response = ['success' => false, 'message' => ''];
@@ -172,11 +132,6 @@ class CursoController {
         echo json_encode($response);
     }
 
-    /**
-     * Deleta um curso
-     * @param int $id ID do curso a ser deletado
-     * @return array Retorna resposta JSON com status da exclusão
-     */
     public function deletar($id) {
         header('Content-Type: application/json');
         $response = ['success' => false, 'message' => ''];
@@ -191,9 +146,6 @@ class CursoController {
         echo json_encode($response);
     }
 
-    /**
-     * Exibe a página de listagem de cursos
-     */
     public function index() {
         $cursos = $this->curso->listarTodos();
         $areas = $this->curso->listarAreas();
@@ -204,10 +156,6 @@ class CursoController {
         include __DIR__ . '/../views/cursos/index.php';
     }
 
-    /**
-     * Exibe a página de detalhes de um curso
-     * @param int $id ID do curso
-     */
     public function detalhes($id) {
         $curso = $this->curso->buscarPorId($id);
         
@@ -217,7 +165,6 @@ class CursoController {
             
             include __DIR__ . '/../views/cursos/detalhes.php';
         } else {
-            // Redireciona para 404 se o curso não existir
             header('Location: /erro404');
             exit;
         }

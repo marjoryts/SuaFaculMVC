@@ -38,11 +38,6 @@ class Faculdade {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Busca faculdades por cidade
-     * @param string $cidade Nome da cidade
-     * @return array Retorna array com faculdades da cidade
-     */
     public function buscarPorCidade($cidade) {
         $query = "SELECT * FROM " . $this->table_name . " WHERE cidade LIKE :cidade ORDER BY nome ASC";
         $stmt = $this->conn->prepare($query);
@@ -52,11 +47,6 @@ class Faculdade {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Busca faculdades por tipo (pública/particular)
-     * @param string $tipo Tipo da faculdade
-     * @return array Retorna array com faculdades do tipo especificado
-     */
     public function buscarPorTipo($tipo) {
         $query = "SELECT * FROM " . $this->table_name . " WHERE tipo = :tipo ORDER BY nome ASC";
         $stmt = $this->conn->prepare($query);
@@ -65,11 +55,6 @@ class Faculdade {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Busca uma faculdade por ID
-     * @param int $id ID da faculdade
-     * @return array|null Retorna os dados da faculdade ou null se não encontrada
-     */
     public function buscarPorId($id) {
         $query = "SELECT * FROM " . $this->table_name . " WHERE id = :id";
         $stmt = $this->conn->prepare($query);
@@ -78,10 +63,6 @@ class Faculdade {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Cria uma nova faculdade
-     * @return bool Retorna true se a faculdade foi criada com sucesso
-     */
     public function criar() {
         $query = "INSERT INTO " . $this->table_name . " 
                   (nome, cidade, estado, tipo, imagem, descricao, endereco, telefone, website) 
@@ -111,11 +92,6 @@ class Faculdade {
 
         return $stmt->execute();
     }
-
-    /**
-     * Atualiza os dados de uma faculdade
-     * @return bool Retorna true se a atualização foi bem-sucedida
-     */
     public function atualizar() {
         $query = "UPDATE " . $this->table_name . " 
                   SET nome = :nome, cidade = :cidade, estado = :estado, tipo = :tipo, 
@@ -125,7 +101,6 @@ class Faculdade {
 
         $stmt = $this->conn->prepare($query);
 
-        // Limpa e valida os dados
         $this->nome = htmlspecialchars(strip_tags($this->nome));
         $this->cidade = htmlspecialchars(strip_tags($this->cidade));
         $this->estado = htmlspecialchars(strip_tags($this->estado));
@@ -137,7 +112,6 @@ class Faculdade {
         $this->website = htmlspecialchars(strip_tags($this->website));
         $this->id = htmlspecialchars(strip_tags($this->id));
 
-        // Vincula os parâmetros
         $stmt->bindParam(":nome", $this->nome);
         $stmt->bindParam(":cidade", $this->cidade);
         $stmt->bindParam(":estado", $this->estado);
@@ -152,11 +126,6 @@ class Faculdade {
         return $stmt->execute();
     }
 
-    /**
-     * Deleta uma faculdade
-     * @param int $id ID da faculdade a ser deletada
-     * @return bool Retorna true se a exclusão foi bem-sucedida
-     */
     public function deletar($id) {
         $query = "DELETE FROM " . $this->table_name . " WHERE id = :id";
         $stmt = $this->conn->prepare($query);
