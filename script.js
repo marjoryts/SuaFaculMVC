@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 // Requisição AJAX para o backend de registro
-                const response = await fetch('/SuaFacul/public/api/usuario/registrar', {
+                const response = await fetch('backend/registrar_usuario.php', {
                     method: 'POST',
                     body: formData
                 });
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.append('password', password);
 
             try {
-                const response = await fetch('/SuaFacul/public/api/usuario/login', {
+                const response = await fetch('backend/login_usuario.php', {
                     method: 'POST',
                     body: formData
                 });
@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // Requisição AJAX para o backend de listagem de usuários
-            const response = await fetch(`/SuaFacul/public/api/usuario/listar?page=${currentPage}&search=${encodeURIComponent(currentSearchTerm)}`);
+            const response = await fetch(`backend/listar_usuarios.php?page=${currentPage}&search=${encodeURIComponent(currentSearchTerm)}`);
             const data = await response.json();
 
             if (usersLoading) usersLoading.style.display = 'none'; 
@@ -286,10 +286,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 // Requisição AJAX para o backend de edição de usuário
-                const response = await fetch('/SuaFacul/public/api/usuario/atualizar', {
-                method: 'POST',
-                body: formData
-            });
+                const response = await fetch('backend/editar_usuario.php', {
+                    method: 'POST',
+                    body: formData
+                });
                 const data = await response.json(); 
 
                 if (data.success) {
@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('id', id);
 
         try {
-            const response = await fetch('/SuaFacul/public/api/usuario/deletar', {
+            const response = await fetch('backend/deletar_usuario.php', {
                 method: 'POST',
                 body: formData
             });
