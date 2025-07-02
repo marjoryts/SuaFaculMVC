@@ -11,7 +11,7 @@ instituições de ensino mais próximas de suas residências e consultar a métr
 nota de corte das universidades.
 
 ## Ferramentas
-Estaremos trabalhando com as ferramentas PHP, JAVA, JavaScript, HTML, CSS e Figma.
+Estaremos trabalhando com as ferramentas PHP, JavaScript, HTML, CSS
 
 ## Equipe
 Oprojeto está sendo desenvolvido por Erick Dantas, Gabriella Sampaio Gomes de Castro, Marjory Teixeira de Sousa e Vinicius Henrique Amorim Codo.
