@@ -1,5 +1,3 @@
-// --- dados dos cursos ---
-// Você pode expandir esta lista com todos os seus 128 cursos ou mais
 const allCourses = [
     {
         name: "Engenharia de Software",
@@ -88,7 +86,7 @@ const allCourses = [
         description: "Projetos e construção de infraestruturas como edifícios, pontes e estradas.",
         duration: "5 anos",
         degree: "Bacharelado",
-        area: "Engenharias", // Adicionando nova área
+        area: "Engenharias",  
         type: "Pública"
     },
     {
@@ -98,10 +96,9 @@ const allCourses = [
         description: "Forma comunicadores para produzir e disseminar informações em diversas plataformas.",
         duration: "4 anos",
         degree: "Bacharelado",
-        area: "Comunicação", // Adicionando nova área
+        area: "Comunicação",
         type: "Privada"
     },
-    // --- Nova Página de Cursos (Exemplo) ---
     {
         name: "Arquitetura e Urbanismo",
         institution: "Mackenzie - Universidade Presbiteriana Mackenzie",
@@ -139,7 +136,7 @@ const allCourses = [
         description: "Estudo da vida em suas diversas formas e níveis de organização.",
         duration: "4 anos",
         degree: "Bacharelado/Licenciatura",
-        area: "Ciências Exatas e da Terra", // Nova área
+        area: "Ciências Exatas e da Terra", 
         type: "Pública"
     },
     {
@@ -169,7 +166,7 @@ const allCourses = [
         description: "Análise das relações políticas, econômicas e sociais entre países.",
         duration: "4 anos",
         degree: "Bacharelado",
-        area: "Humanas", // Nova área
+        area: "Humanas", 
         type: "Pública"
     },
     {
@@ -202,7 +199,6 @@ const allCourses = [
         area: "Negócios",
         type: "Pública"
     },
-    // Adicione mais cursos para simular a paginação
     { name: "Sistemas de Informação", institution: "PUC Minas", modality: "ead", description: "Desenvolvimento e gestão de sistemas de informação.", duration: "4 anos", degree: "Bacharelado", area: "Tecnologia", type: "Privada" },
     { name: "Publicidade e Propaganda", institution: "ESPM", modality: "presencial", description: "Criação e execução de campanhas publicitárias.", duration: "4 anos", degree: "Bacharelado", area: "Comunicação", type: "Privada" },
     { name: "Física", institution: "USP", modality: "presencial", description: "Estudo das leis fundamentais do universo.", duration: "4 anos", degree: "Bacharelado/Licenciatura", area: "Ciências Exatas e da Terra", type: "Pública" },
@@ -213,7 +209,7 @@ const allCourses = [
     { name: "Serviço Social", institution: "PUC-Rio", modality: "presencial", description: "Atuação em políticas sociais e direitos humanos.", duration: "4 anos", degree: "Bacharelado", area: "Humanas", type: "Privada" },
     { name: "Biblioteconomia", institution: "USP", modality: "presencial", description: "Organização e gestão de informação.", duration: "4 anos", degree: "Bacharelado", area: "Humanas", type: "Pública" },
     { name: "Geografia", institution: "UFRJ", modality: "presencial", description: "Análise do espaço geográfico e suas interações.", duration: "4 anos", degree: "Bacharelado/Licenciatura", area: "Ciências da Terra", type: "Pública" },
-    // Mais para preencher 3 ou 4 páginas
+
     { name: "Engenharia de Alimentos", institution: "UNICAMP", modality: "presencial", description: "Processamento e conservação de alimentos.", duration: "5 anos", degree: "Bacharelado", area: "Engenharias", type: "Pública" },
     { name: "Design de Interiores", institution: "Belas Artes", modality: "presencial", description: "Criação de ambientes funcionais e estéticos.", duration: "3 anos", degree: "Bacharelado", area: "Artes e Design", type: "Privada" },
     { name: "Ciências Políticas", institution: "USP", modality: "presencial", description: "Estudo de sistemas políticos e poder.", duration: "4 anos", degree: "Bacharelado", area: "Humanas", type: "Pública" },
@@ -236,11 +232,11 @@ const allCourses = [
     { name: "Geologia", institution: "UFRJ", modality: "presencial", description: "Estudo da Terra e seus processos.", duration: "5 anos", degree: "Bacharelado", area: "Ciências da Terra", type: "Pública" },
 ];
 
-const coursesPerPage = 10; // Quantidade de cursos por página
+const coursesPerPage = 10; 
 let currentPage = 1;
-let filteredCourses = [...allCourses]; // Inicia com todos os cursos, será filtrado
+let filteredCourses = [...allCourses]; 
 
-// Referências aos elementos HTML
+
 const coursesGrid = document.querySelector('.courses-grid');
 const paginationContainer = document.querySelector('.pagination');
 const coursesCountElement = document.querySelector('.courses-count');
@@ -252,13 +248,12 @@ const searchInput = document.querySelector('.search-box input[type="text"]');
 const searchButton = document.querySelector('.btn-search');
 
 
-// Função para renderizar os cursos na grade
 function renderCourses(page) {
     const startIndex = (page - 1) * coursesPerPage;
     const endIndex = startIndex + coursesPerPage;
     const coursesToRender = filteredCourses.slice(startIndex, endIndex);
 
-    coursesGrid.innerHTML = ''; // Limpa a grade atual
+    coursesGrid.innerHTML = '';
 
     if (coursesToRender.length === 0) {
         coursesGrid.innerHTML = '<p class="no-results">Nenhum curso encontrado com os filtros aplicados.</p>';
@@ -270,7 +265,6 @@ function renderCourses(page) {
         const courseCard = document.createElement('div');
         courseCard.classList.add('course-card');
 
-        // Determina a classe da tag de modalidade
         let tagClass = '';
         if (course.modality === 'presencial') {
             tagClass = 'presencial';
@@ -304,15 +298,13 @@ function renderCourses(page) {
         coursesGrid.appendChild(courseCard);
     });
 
-    // Atualiza o contador de cursos
     const startDisplay = startIndex + 1;
     const endDisplay = Math.min(endIndex, filteredCourses.length);
     coursesCountElement.textContent = `${startDisplay}-${endDisplay} de ${filteredCourses.length} cursos`;
 }
 
-// Função para renderizar os botões de paginação
 function renderPagination() {
-    paginationContainer.innerHTML = ''; // Limpa a paginação existente
+    paginationContainer.innerHTML = ''; 
     const totalPages = Math.ceil(filteredCourses.length / coursesPerPage);
 
     // Botão "Anterior"
@@ -360,7 +352,7 @@ function renderPagination() {
     const nextButton = document.createElement('a');
     nextButton.href = "#";
     nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
-    if (currentPage === totalPages || totalPages === 0) { // Desabilita se for a última página ou não houver cursos
+    if (currentPage === totalPages || totalPages === 0) { 
         nextButton.classList.add('disabled');
     }
     nextButton.addEventListener('click', (e) => {
@@ -383,7 +375,7 @@ function applyFilters() {
         .filter(checkbox => checkbox.checked)
         .map(checkbox => checkbox.nextSibling.textContent.trim());
 
-    // Obter o termo de busca
+
     const searchTerm = searchInput.value.toLowerCase().trim();
 
     filteredCourses = allCourses.filter(course => {
@@ -414,7 +406,7 @@ function applyFilters() {
         return matchesArea && matchesModalities && matchesInstitutions && matchesSearch;
     });
 
-    currentPage = 1; // Volta para a primeira página após aplicar filtros
+    currentPage = 1; 
     updatePaginationAndCourses();
 }
 
@@ -431,7 +423,7 @@ const mobileMenuButton = document.querySelector('.mobile-menu');
 const navbar = document.querySelector('.navbar');
 
 mobileMenuButton.addEventListener('click', () => {
-    navbar.classList.toggle('active'); // Adiciona/remove a classe 'active' para mostrar/esconder
+    navbar.classList.toggle('active'); 
 });
 
 // Opcional: fechar o menu ao clicar em um link
@@ -449,24 +441,19 @@ navbar.querySelectorAll('a').forEach(link => {
 // Área de Conhecimento
 areaButtons.forEach(button => {
     button.addEventListener('click', () => {
-        // Remove 'active' de todos os botões de área
         areaButtons.forEach(btn => btn.classList.remove('active'));
-        // Adiciona 'active' ao botão clicado
         button.classList.add('active');
-        // Não aplica os filtros imediatamente, espera o botão 'Aplicar Filtros'
     });
 });
 
 // Modalidade e Tipo de Instituição (checkboxes)
 modalityCheckboxes.forEach(checkbox => {
     checkbox.addEventListener('change', () => {
-        // Não aplica os filtros imediatamente, espera o botão 'Aplicar Filtros'
     });
 });
 
 institutionCheckboxes.forEach(checkbox => {
     checkbox.addEventListener('change', () => {
-        // Não aplica os filtros imediatamente, espera o botão 'Aplicar Filtros'
     });
 });
 
@@ -475,8 +462,8 @@ applyFiltersButton.addEventListener('click', applyFilters);
 
 // Busca por texto
 searchButton.addEventListener('click', (e) => {
-    e.preventDefault(); // Evita que a página recarregue
-    applyFilters(); // A função applyFilters já incorpora a busca
+    e.preventDefault();
+    applyFilters(); 
 });
 
 searchInput.addEventListener('keypress', (e) => {
@@ -486,10 +473,8 @@ searchInput.addEventListener('keypress', (e) => {
     }
 });
 
-
 // --- Inicialização ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Garante que o botão 'Todas as áreas' esteja ativo por padrão ao carregar a página
     document.querySelector('.filter-options button.active').classList.add('active');
-    updatePaginationAndCourses(); // Renderiza a primeira página e a paginação ao carregar
+    updatePaginationAndCourses(); 
 });

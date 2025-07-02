@@ -8,9 +8,8 @@
     <link rel="stylesheet" href="/SuaFacul/public/css/pages/loginstyle.css">
 </head>
 <body>
-    <!-- Botão de voltar no canto superior esquerdo -->
     <button type="button" onclick="window.location.href='/SuaFacul/public/home';" class="voltar-btn" aria-label="Voltar para a home">
-        &#8592;
+        <i class='bx bx-arrow-back'></i> Voltar
     </button>
     <div class="container" id="container">
         <!-- Formulário de Login -->
@@ -103,9 +102,9 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    alertDiv.innerHTML = '<div class="alert success">Login realizado com sucesso! Redirecionando...</div>';
+                    alertDiv.innerHTML = '<div class="alert success">Login realizado com sucesso! ...</div>';
                     setTimeout(() => {
-                        window.location.href = '/SuaFacul/public/';
+                        window.location.href = '/SuaFacul/public/dashboard';
                     }, 1000);
                 } else {
                     alertDiv.innerHTML = `<div class="alert error">${data.message}</div>`;
@@ -139,7 +138,7 @@
                 if (data.success) {
                     alertDiv.innerHTML = '<div class="alert success">Usuário registrado com sucesso!</div>';
                     setTimeout(() => {
-                        toggleForm(); // Volta para o login
+                        toggleForm();
                     }, 1000);
                 } else {
                     alertDiv.innerHTML = `<div class="alert error">${data.message}</div>`;

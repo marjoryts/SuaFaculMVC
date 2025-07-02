@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Controllers;
-
 require_once __DIR__ . '/../models/Usuario.php';
-
 use App\Models\Usuario;
 
 class DashboardController {
@@ -14,7 +12,6 @@ class DashboardController {
     }
 
     public function dashboard() {
-        // Verificar se o usuário está logado
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
@@ -23,15 +20,12 @@ class DashboardController {
             exit;
         }
 
-        // Buscar dados do usuário
         $usuario = $this->usuarioModel->buscarPorId($_SESSION['user_id']);
-        
-        // Renderizar a view do dashboard
+
         include __DIR__ . '/../views/dashboard.php';
     }
 
     public function admin() {
-        // Verificar se o usuário está logado
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }

@@ -1,10 +1,8 @@
 <?php
 session_start();
 
-// Configurar autoload do Composer
 require_once __DIR__ . '/../vendor/autoload.php';
 
-// Incluir controllers manualmente se necessário
 if (!class_exists('App\Controllers\UsuarioController')) {
     require_once __DIR__ . '/../app/controllers/UsuarioController.php';
 }
@@ -15,20 +13,16 @@ if (!class_exists('App\Controllers\DashboardController')) {
 use App\Controllers\UsuarioController;
 use App\Controllers\DashboardController;
 
-// Obter a URL da requisição
 $request_uri = $_SERVER['REQUEST_URI'];
 $base_path = '/SuaFacul/public/';
 $path = str_replace($base_path, '', $request_uri);
 $path = parse_url($path, PHP_URL_PATH);
 
-// Remover trailing slash
 $path = rtrim($path, '/');
 
-// Se não houver path, definir como home
 if (empty($path)) {
     $path = 'home';
 }
-// routerr
 switch ($path) {
     case 'home':
         include __DIR__ . '/../app/views/home.php';
