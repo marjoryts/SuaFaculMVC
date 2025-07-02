@@ -1,10 +1,6 @@
 <?php
 require_once __DIR__ . '/../config/Database.php';
 
-/**
- * Modelo Vestibular
- * Responsável por todas as operações relacionadas aos vestibulares no banco de dados
- */
 class Vestibular {
     private $conn;
     private $table_name = "vestibulares";

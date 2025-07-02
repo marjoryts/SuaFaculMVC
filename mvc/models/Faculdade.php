@@ -1,10 +1,6 @@
 <?php
 require_once __DIR__ . '/../config/Database.php';
 
-/**
- * Modelo Faculdade
- * Responsável por todas as operações relacionadas às faculdades no banco de dados
- */
 class Faculdade {
     private $conn;
     private $table_name = "faculdades";
@@ -25,10 +21,7 @@ class Faculdade {
         $this->conn = $database->getConnection();
     }
 
-    /**
-     * Lista todas as faculdades
-     * @return array Retorna array com todas as faculdades
-     */
+    
     public function listarTodas() {
         $query = "SELECT * FROM " . $this->table_name . " ORDER BY nome ASC";
         $stmt = $this->conn->prepare($query);
@@ -36,11 +29,7 @@ class Faculdade {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Lista faculdades em destaque
-     * @param int $limite Número de faculdades a retornar
-     * @return array Retorna array com faculdades em destaque
-     */
+    
     public function listarDestaque($limite = 4) {
         $query = "SELECT * FROM " . $this->table_name . " WHERE destaque = 1 ORDER BY nome ASC LIMIT :limite";
         $stmt = $this->conn->prepare($query);
@@ -100,7 +89,6 @@ class Faculdade {
 
         $stmt = $this->conn->prepare($query);
 
-        // Limpa e valida os dados
         $this->nome = htmlspecialchars(strip_tags($this->nome));
         $this->cidade = htmlspecialchars(strip_tags($this->cidade));
         $this->estado = htmlspecialchars(strip_tags($this->estado));
@@ -111,7 +99,6 @@ class Faculdade {
         $this->telefone = htmlspecialchars(strip_tags($this->telefone));
         $this->website = htmlspecialchars(strip_tags($this->website));
 
-        // Vincula os parâmetros
         $stmt->bindParam(":nome", $this->nome);
         $stmt->bindParam(":cidade", $this->cidade);
         $stmt->bindParam(":estado", $this->estado);

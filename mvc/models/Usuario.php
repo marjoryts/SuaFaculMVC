@@ -1,10 +1,6 @@
 <?php
 require_once __DIR__ . '/../config/Database.php';
 
-/**
- * Modelo Usuario
- * Responsável por todas as operações relacionadas aos usuários no banco de dados
- */
 class Usuario {
     private $conn;
     private $table_name = "usuarios";

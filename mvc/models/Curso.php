@@ -1,10 +1,6 @@
 <?php
 require_once __DIR__ . '/../config/Database.php';
 
-/**
- * Modelo Curso
- * Responsável por todas as operações relacionadas aos cursos no banco de dados
- */
 class Curso {
     private $conn;
     private $table_name = "cursos";
