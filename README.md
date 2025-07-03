@@ -22,6 +22,7 @@ Oprojeto está sendo desenvolvido por Erick Dantas, Gabriella Sampaio Gomes de C
 SuaFacul/
 ├── app/
 │   ├── controllers/
+│   │   └── DashboardController.php
 │   │   └── UsuarioController.php
 │   ├── models/
 │   │   └── Usuario.php
