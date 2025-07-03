@@ -6,22 +6,17 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function openTab(tabName) {
-    // Esconder todas as tabs
     const tabContents = document.getElementsByClassName('tab-content');
     for (let content of tabContents) {
         content.classList.remove('active');
     }
 
-    // Remover classe active de todos os botões
     const tabButtons = document.getElementsByClassName('tab-button');
     for (let button of tabButtons) {
         button.classList.remove('active');
     }
-
-    // Mostrar a tab selecionada
     document.getElementById(tabName).classList.add('active');
     
-    // Adicionar classe active ao botão clicado
     event.target.classList.add('active');
 }
 
@@ -156,17 +151,14 @@ function excluirUsuario(id) {
     }
 }
 
-// Função para logout
 function handleLogout() {
     window.location.href = '/SuaFacul/public/logout';
 }
 
-// Função para navegar para o dashboard
 function irParaDashboard() {
     window.location.href = '/SuaFacul/public/dashboard';
 }
 
-// Formulário de usuário
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('user-form').addEventListener('submit', function(e) {
         e.preventDefault();
@@ -207,7 +199,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Fechar modal ao clicar fora
     window.onclick = function(event) {
         const userModal = document.getElementById('user-modal');
         const confirmModal = document.getElementById('confirm-modal');

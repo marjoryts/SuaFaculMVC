@@ -15,7 +15,6 @@ class Usuario {
 
     public function criar($username, $email, $password) {
         try {
-            // Verificar se usuário ou email já existe
             $sql_check = "SELECT id FROM " . $this->table_name . " WHERE nome_usuario = :username OR email = :email";
             $stmt_check = $this->conn->prepare($sql_check);
             $stmt_check->bindParam(':username', $username, \PDO::PARAM_STR);
