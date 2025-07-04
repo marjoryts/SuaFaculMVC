@@ -1,8 +1,6 @@
 <?php
-// Teste da estrutura MVC
 echo "<h1>Teste da Estrutura MVC - SuaFacul</h1>";
 
-// Teste 1: Verificar se os diretórios existem
 echo "<h2>1. Verificação de Diretórios</h2>";
 $dirs = ['app', 'app/controllers', 'app/models', 'app/views', 'config', 'public', 'vendor'];
 foreach ($dirs as $dir) {
