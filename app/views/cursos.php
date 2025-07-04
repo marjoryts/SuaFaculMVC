@@ -245,7 +245,7 @@
             </div>
         </div>
     </footer>
-    <script src="/SuaFacul/public/cursos.js"></script>
+    <script src="/SuaFacul/public/js/cursos.js"></script>
 </body>
 
 </html>
